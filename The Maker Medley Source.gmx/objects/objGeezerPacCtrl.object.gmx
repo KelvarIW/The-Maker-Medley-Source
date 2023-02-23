@@ -1006,7 +1006,7 @@ draw_rectangle(384 + 0.5, 288 + 0.5, 416 - 0.5, 296 + 0.5, false);
 draw_set_alpha(1);
 
 if (speedTimer &gt; 0 &amp;&amp; instance_exists(objPlayer)){
-    if (!surface_exists(playerGlowSurf)) playerGlowSurf = surface_create(32, 32);
+    if (!surface_exists(playerGlowSurf)){playerGlowSurf = surface_create(32, 32);}
     if (surface_exists(playerGlowSurf)){
         surface_set_target(playerGlowSurf);
         draw_clear_alpha(c_black, 0);
@@ -1017,7 +1017,7 @@ if (speedTimer &gt; 0 &amp;&amp; instance_exists(objPlayer)){
         }
         surface_reset_target();
         d3d_set_fog(true, speedColor, 0, 1);
-        for(i=1;i&lt;=3;i++;){
+        for(var i=1;i&lt;=3;i++;){
             draw_surface_ext(playerGlowSurf, objPlayer.x - 16*(1.2 + (i/5)*sin(speedGlow)), objPlayer.y - 23*(1.2 + (i/5)*sin(speedGlow)), 1.2 + (i/5)*sin(speedGlow), 1.2 + (i/5)*sin(speedGlow), 0, c_black, 1 - 0.1*(i-1));
         }
         d3d_set_fog(false, c_white, 0, 1);

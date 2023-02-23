@@ -15,4 +15,5 @@ else                    //mute music
     audio_stop_sound(global.BGMBoss4Avo2);
     audio_stop_sound(global.BGMBoss4Avo3);
     //audio_stop_sound(sndPlantsMiku);  // only needed if we're treating it like music
+    audio_stop_sound(sndPlantsGameOver);  // only needed if we're treating it like music
 }

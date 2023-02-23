@@ -32,10 +32,11 @@ audio_play_sound(sndMakerParachuteLost, 0, 0);
 destroyed = false;
 sprite_index = sprPlantsShurikenSmall;
 mask_index = sprPlantsShurikenSmall;
-image_xscale = 1;
-image_yscale = 1;
+image_xscale = 1.2;
+image_yscale = 1.2;
 hp = -1;
 yBase = 26;
+y -= 12;
 </string>
           </argument>
         </arguments>
@@ -115,7 +116,7 @@ yBase = 26;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (!(timer &lt; 34 || destroyed || other.dead || other.row != row || (other.object_index == objPlantsIWBTGSpike))){
+            <string>if (!(timer &lt; 34 || destroyed || other.dead || other.row != row)){  // (other.object_index == objPlantsIWBTGSpike)
     if (other.object_index == objPlantsGuy){
         with (other){
             var _hit = true;
@@ -134,7 +135,7 @@ yBase = 26;
                 instaHit[0] = other.id;
                 
                 // register hit
-                hpLost = ceil(hpInit/instasNeeded);
+                hpLost = ceil(hpInit/instaDiv);
                 if (hp &lt;= hpLost){
                     event_user(2);
                 }else{
@@ -161,7 +162,7 @@ yBase = 26;
                 }
             }
         }
-    }else{
+    }else if (other.object_index != objPlantsIWBTGSpike || timer &gt;= 70){
         with (other){
             goreSpd = clamp(other.hspeed/6, 0.5, 3.5);
             event_user(2);
@@ -190,14 +191,14 @@ yBase = 26;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (!destroyed){
-    if (timer &gt;= 46 &amp;&amp; !scrPlantsStationary(other) &amp;&amp; !scrPlantsInvincible(other) &amp;&amp; !scrPlantsPlantTooLow(other) &amp;&amp; !other.dead){
+            <string>/*if (!destroyed){
+    if (timer &gt;= 46 &amp;&amp; scrPlantsStationary(other) &amp;&amp; !scrPlantsInvincible(other) &amp;&amp; !scrPlantsPlantTooLow(other) &amp;&amp; !other.dead){
         other.hp = 0;
         with (other){
             event_user(2);
         }
     }
-}
+}*/
 </string>
           </argument>
         </arguments>
@@ -304,6 +305,7 @@ if (timer &gt; 78){
           <argument>
             <kind>1</kind>
             <string>///Draw
+var _rise = 80;
 if (timer &gt;= 18 &amp;&amp; timer &lt; 78){
     if (instance_exists(objPlantsCtrl)){
         var _dim = objPlantsCtrl.smallSurfDim;
@@ -313,8 +315,9 @@ if (timer &gt;= 18 &amp;&amp; timer &lt; 78){
         if (surface_exists(objPlantsCtrl.smallSurf)){
             surface_set_target(objPlantsCtrl.smallSurf);
             draw_clear_alpha(c_black, 0);
-        
-            draw_sprite_ext(sprPlantsShurikenSmall, 0, 32, 96-0.7619*(6.5*(timer-18)/2.3 - 0.125*sqr((timer-18)/2.3)), 1, 1, image_angle, c_white, 1);
+            
+            var _t = (timer-18);
+            draw_sprite_ext(sprPlantsShurikenSmall, 0, 32, _dim - (0.7619)*(6.5*(_t/2.3) - 0.125*sqr(_t/2.3)), 1, 1, image_angle, c_white, 1);
             draw_set_blend_mode(bm_subtract);
             draw_sprite_ext(sprPlantsHoleMask, 0, 32 - (x - xstart), (32 + yBase), 1, 1, 0, c_white, 1);
             draw_set_blend_mode(bm_normal);

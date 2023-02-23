@@ -50,7 +50,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (global.dropshadows){
+            <string>if (global.dropshadows &amp;&amp; !instance_exists(objGeezerPacCtrl)){
     if (!surface_exists(global.sharedSurf3)){
         global.sharedSurf3 = surface_create(800, 608);
     }

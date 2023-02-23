@@ -205,8 +205,9 @@ audio_stop_sound(sndMakerMenuClick);
 audio_stop_sound(sndMakerMenuSelect);
 audio_stop_sound(sndMakerMenuRelease);
 
-audio_stop_sound(sndPlantsMiku);  // only needed if we're treating it like music
-
+// only needed if we're treating it like music
+audio_stop_sound(sndPlantsMiku);
+audio_stop_sound(sndPlantsGameOver);
 </string>
           </argument>
         </arguments>
@@ -593,7 +594,10 @@ if (!global.dead){  // everything should freeze when the player death animation 
     if (deathEffect){
         deathTimer += 1;
         if (floor(deathTimer) == deathGameOverDelay){
-            audio_play_sound(sndPlantsGameOver, 0, 0);
+            if (!global.muteMusic &amp;&amp; global.musicLevel &gt; 0 &amp;&amp; global.volumeLevel &gt; 0){
+                var _snd = audio_play_sound(sndPlantsGameOver, 0, 0);
+                audio_sound_gain(_snd, 0.8 * global.musicLevel/100 * global.volumeLevel/100, 0);
+            }
         }
     }
     

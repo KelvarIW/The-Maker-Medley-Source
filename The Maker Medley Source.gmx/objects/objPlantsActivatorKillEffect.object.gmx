@@ -109,7 +109,7 @@ visible = false;
                         instaHit[0] = other.id;
                         
                         // register hit
-                        hpLost = ceil(hpInit/instasNeeded);
+                        hpLost = ceil(hpInit/instaDiv);
                         if (hp &lt;= hpLost){
                             event_user(2);
                         }else{

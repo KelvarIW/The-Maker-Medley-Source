@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>event_inherited();
 image_speed = 0;
-hp = 24;
+hp = 18;
 hpInit = hp;
 glowAlpha = 0;
 run = true;
@@ -46,8 +46,9 @@ pushWeightMult = 0.5;
 scrPlantsGoreInit(1);
 armDist = sqrt(640); //(24^2 + 8^2)^0.5
 animCounter = 0;
-instasNeeded = 2;  // Instakills should not actually instantly kill The Guy
-for (var i = (instasNeeded-1); i &gt;= 0; i--){
+instasNeeded = 3;  // Instakills should not actually instantly kill The Guy  (/instaDiv)
+instaDiv = 2.4;
+for (var i = (instasNeeded-1); i &gt;= 0; i--;){
     instaHit[i] = -4;  // prevents getting hit by the same shuriken/mine twice
 }
 

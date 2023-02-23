@@ -90,7 +90,9 @@ if (instance_exists(objPlantsCtrl)){
         }
     }
     
-    event_user(0);
+    if (global.dropshadows){
+        event_user(0);
+    }
     
     with (objPlantsSpike){
         event_user(4);  //launcher backing
