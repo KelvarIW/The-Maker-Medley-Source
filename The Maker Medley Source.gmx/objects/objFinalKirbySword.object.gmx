@@ -107,7 +107,11 @@ switch(state){
         image_angle += _rotSpeed*_signXscale;
         break;
     case 1:
-        destDir = point_direction(x, y, objPlayer.x, objPlayer.y);
+        if (instance_exists(objPlayer)){
+            destDir = point_direction(x, y, objPlayer.x, objPlayer.y);
+        }else{
+            destDir = point_direction(x, y, 400, 448);
+        }
         
         var _diff = angle_difference(image_angle + _angOff, destDir);
         var _diffNext = angle_difference((image_angle + _angOff) + _rotSpeed*_signXscale, destDir);
